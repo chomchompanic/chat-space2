@@ -2,25 +2,23 @@
   .main-header
     .main-header__left-box
       .main-header__left-box__current-group
-        丁村
+        curren
       .main-header__left-box__member-list
-        Member : chom
-    = link_to "#", class: "main-header__edit-btn" do
+        Member : 
+        %ul
+          - @group.users.each do |user|
+            %li= user.name
+    
+    = link_to edit_group_path(current_user), class: "main-header__edit-btn" do
       Edit
+      
   .messages
-    .message
-      .message__upper-info
-        .message__upper-info__talker
-          chom
-        .message__upper-info__date
-          2019/12/20(Wed) 17:00:00
-      .message__text
-        始まりはいつも雨
+    = render @messages
   .form
-    %form.new_message
+    = form_for [@group, @message] do |f|
       .input-box
-        %input{type: "text", class: "input-box__text", placeholder: "type a message"}
-        %label{class: "input-box__image"}
-          = icon('fas', 'image')
-          %input{type: "file", class: "input-box__image__file"}
-      %input{type: "submit", class: "submit-btn", value: "Send"} 
+        = f.text_field :content, class: 'input-box__text', placeholder: 'type a message'
+        = f.label :image, class: 'input-box__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'input-box__image__file'
+      = f.submit 'Send', class: 'submit-btn'
