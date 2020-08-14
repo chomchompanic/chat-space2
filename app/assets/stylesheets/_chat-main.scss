@@ -19,6 +19,16 @@
       &__member-list{
       font-size: 12px;
       color: #999999;
+      display: flex;
+      }
+      .members {
+        display: flex
+        ;
+        &__member{
+          justify-content: space-between;
+          display: list-item;
+          padding-right: 5px;
+        }
       }
     }
     &__edit-btn{
